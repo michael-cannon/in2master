@@ -1,0 +1,94 @@
+# <INCLUDE_TYPOSCRIPT: source="FILE:EXT:css_styled_content/static/setup.txt">
+
+# styles.content.get* replacement for altering registers
+lib.content.get = COA
+lib.content.get {
+	20 = CONTENT
+	20 {
+		wrap = <!--TYPO3SEARCH_begin-->|<!--TYPO3SEARCH_end-->
+	
+	    table = tt_content
+	    select {
+	        where = deleted = 0 AND hidden = 0 AND colPos = 0
+	        languageField = sys_language_uid
+	    }
+	    renderObj = COA
+	    renderObj {
+	        10 = LOAD_REGISTER
+            10 {
+                # the first content element is the most important
+            	defaultHeaderType = {$content.defaultHeaderType}
+            	defaultHeaderType {
+					current = 1
+            		override = {$content.defaultHeaderTypePrimary}
+            		override {
+            			if {
+            				value = 1
+            				equals.data = cObj:parentRecordNumber
+            			}
+            		}
+            	}
+            }
+
+            20 < tt_content
+
+            30 = RESTORE_REGISTER
+	    }
+	}
+}
+
+lib.content.getLeft < lib.content.get
+lib.content.getLeft {
+	20 {
+		wrap >
+	    renderObj {
+            10 {
+				defaultHeaderType = {$content.defaultHeaderTypeSidebar}
+				defaultHeaderType.override = {$content.defaultHeaderTypeSidebarPrimary}
+				maxImageWidth = {$styles.content.sidebar.imgtext.maxW}
+				maxImageWidthInText = {$styles.content.sidebar.imgtext.maxWInText}
+			}
+		}
+
+		select.where = deleted = 0 AND hidden = 0 AND colPos = 1
+	}
+}
+
+lib.content.getRight < lib.content.getLeft
+lib.content.getRight {
+	20 {
+		select.where = deleted = 0 AND hidden = 0 AND colPos = 2
+	}
+}
+
+lib.content.getBorder < lib.content.getLeft
+lib.content.getBorder {
+	20 {
+		select.where = deleted = 0 AND hidden = 0 AND colPos = 3
+	}
+}
+
+[globalVar = LIT:1 = {$config.content.typo3search}]
+	lib.content.getLeft.20.wrap = <!--TYPO3SEARCH_begin-->|<!--TYPO3SEARCH_end-->
+	lib.content.getRight.20.wrap = <!--TYPO3SEARCH_begin-->|<!--TYPO3SEARCH_end-->
+	lib.content.getBorder.20.wrap = <!--TYPO3SEARCH_begin-->|<!--TYPO3SEARCH_end-->
+[end]
+
+[globalVar = LIT:1 = {$content.disableHeaderTypeSwapping}]
+	lib.content.get.20.renderObj.10 {
+		defaultHeaderType >
+		defaultHeaderType = {$content.defaultHeaderType}
+	}
+	lib.content.getLeft.20.renderObj.10 {
+		defaultHeaderType >
+		defaultHeaderType = {$content.defaultHeaderType}
+	}
+	lib.content.getRight.20.renderObj.10 {
+		defaultHeaderType >
+		defaultHeaderType = {$content.defaultHeaderType}
+	}
+	lib.content.getBorder.20.renderObj.10 {
+		defaultHeaderType >
+		defaultHeaderType = {$content.defaultHeaderType}
+	}
+[end]

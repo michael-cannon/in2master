@@ -1,0 +1,194 @@
+config {
+	absRefPrefix = {$config.absRefPrefix}
+	admPanel = {$config.admPanel}
+	content_from_pid_allowOutsideDomain = {$config.content_from_pid_allowOutsideDomain}
+	debug = {$config.debug}
+	devIp = {$config.devIp}
+	disableBaseWrap = {$config.disableBaseWrap}
+	disableImgBorderAttr = {$config.disableImgBorderAttr}
+	doctype = {$config.doctype}
+	extTarget = {$config.extTarget}
+	headerComment = {$config.headerComment}
+	index_enable = {$config.index_enable}
+	index_externals = {$config.index_externals}
+	intTarget = {$PAGE_TARGET}
+	linkVars = L
+	meaningfulTempFilePrefix = {$config.meaningfulTempFilePrefix}
+	metaCharset = {$config.metaCharset}
+	notification_email_charset = {$config.notification_email_charset}
+	notification_email_encoding = {$config.notification_email_encoding}
+	notification_email_urlmode = {$config.notification_email_urlmode}
+	pageTitleFirst = {$config.pageTitleFirst}
+	prefixLocalAnchors = {$config.prefixLocalAnchors}
+	redirectOldLinksToNew = {$config.redirectOldLinksToNew}
+	renderCharset = {$config.renderCharset}
+	sendCacheHeaders = {$config.sendCacheHeaders}
+	sendCacheHeaders = {$config.sendCacheHeaders}
+	simulateStaticDocuments = {$config.simulateStaticDocuments}
+	simulateStaticDocuments_addTitle = {$config.simulateStaticDocuments_addTitle}
+	simulateStaticDocuments_noTypeIfNoTitle = {$config.simulateStaticDocuments_noTypeIfNoTitle}
+	simulateStaticDocuments_pEnc = {$config.simulateStaticDocuments_pEnc}
+	simulateStaticDocuments_pEnc_onlyP = {$config.simulateStaticDocuments_pEnc_onlyP}
+	spamProtectEmailAddresses = {$config.spamProtectEmailAddresses}
+	spamProtectEmailAddresses_atSubst = {$config.spamProtectEmailAddresses_atSubst}
+	spamProtectEmailAddresses_lastDotSubst = {$config.spamProtectEmailAddresses_lastDotSubst}
+	sys_language_mode = {$config.sys_language_mode}
+	sys_language_overlay = {$config.sys_language_overlay}
+	tx_realurl_enable = {$config.tx_realurl_enable}
+	typolinkCheckRootline = {$config.typolinkCheckRootline}
+	typolinkEnableLinksAcrossDomains = {$config.typolinkEnableLinksAcrossDomains}
+	uniqueLinkVars = {$config.uniqueLinkVars}
+	xhtmlDoctype = {$config.doctype}
+	xhtml_cleaning = {$config.xhtml_cleaning}
+	xmlprologue = {$config.xmlprologue}
+}
+
+# TODO protocol option - http or https
+
+# Set baseURL setting for http or https
+config.baseURL = http://{$config.domain}/
+
+[globalString = IENV:HTTPS=1]
+	config.baseURL = https://{$config.domain}/
+[global]
+
+[globalString = IENV:HTTP_HOST={$config.devDomain}]
+	config.baseURL = http://{$config.devDomain}/
+[end]
+
+styles {
+	content {
+		links.extTarget = {$config.extTarget}
+
+		mailform {
+			target = {$PAGE_TARGET}
+		}
+	}
+
+	sitemap {
+		text {
+			target = {$PAGE_TARGET}
+		}
+	}
+}
+
+plugin {
+	tx_cssstyledcontent {
+		_CSS_DEFAULT_STYLE >
+	}
+
+	tx_indexedsearch {
+		forwardSearchWordsInResultLink = 0
+
+		search {
+			detect_sys_domain_records = 1
+			exactCount = 1
+			rootPidList = {$config.rootPid}
+		}
+
+		show {
+			advancedSearchLink = {$config.show.advancedSearchLink}
+			rules = {$config.show.rules}
+		}
+
+		_DEFAULT_PI_VARS {
+			results = 10
+		}
+
+		_CSS_DEFAULT_STYLE >
+	}
+
+	wt_spamshield {
+		enable.standardMailform = 1
+	}
+}
+
+tt_content {
+	# show caption only if it exists (prevents empty div with class "csc-textpic-caption")
+	image.20.rendering.div.caption.if.isTrue.field = imagecaption
+
+	stdWrap {
+		dataWrap = {$tt_content.stdWrap.dataWrap}
+		prefixComment = {$tt_content.stdWrap.prefixComment}
+
+		# HTML5 setup
+		# @ref http://www.typo3-addict.com/2011/04/typo3-a-basic-html5-tutorial/
+		# Change <div id="c#"> to <section id="c#">
+		innerWrap.cObject.default {
+			10 {
+				value = <section id="c{field:uid}"
+				override >
+			}
+			30.value = >|</section>
+		}
+	}
+
+	# Make some modifications to the rendering of the standard MAIL form records
+	mailform.20 {
+		accessibility = 1
+	}
+
+	menu.20.2.includeNotInMenu = {$config.includeNotInMenu}
+}
+
+lib.parseFunc_RTE {
+	nonTypoTagStdWrap.encapsLines {
+		remapTag.DIV = {$lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines.remapTag.DIV}
+		nonWrappedTag = {$lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines.nonWrappedTag}
+
+		# Remove 'class="bodytext"' that's bizarrely applied to EVERY <p> by default
+		addAttributes.P.class >
+
+		# avoid empty <p> tags
+		wrapNonWrappedLines >
+	}
+
+	# Allow embed (Youtube) HTML tags in the RTE
+	allowTags := addToList(object,param,embed,iframe,script)
+
+	# remove p tags from table cells
+	# important: don't wrap these tags in p
+	externalBlocks = ul,ol,table
+	externalBlocks {
+		# Need to research why tables are not displayed on newer front-ends
+		Xtable {
+			# Remove class="contenttable"
+			stdWrap.HTMLparser >
+
+			# if table has a class, use it, otherwise class=contenttable
+			stdWrap.HTMLparser.tags.table.fixAttrib.class.list >
+
+			# allow repeated parsing of table cells - needed for media tags
+			HTMLtableCells.default.callRecursive = 1
+
+			# allow hyperlinks in table cells
+			HTMLtableCells.default.stdWrap.parseFunc {
+				makelinks = 1
+				makelinks.http.keep = scheme,path,query
+				makelinks.mailto.keep = path
+				tags {
+					link = TEXT
+					link {
+						current = 1
+						typolink.parameter.data = parameters : allParams
+					}
+				}
+			}
+		}
+	}
+}
+
+searchresult.rootPidList = {$config.rootPid}
+
+TSFE.jumpUrl_transferSession = 1
+
+lib.stdheader {
+	stdWrap.dataWrap = {$config.headerDataWrap}
+}
+
+# Condition to switch the doctype and xml prologue
+[browser = msie] && [version = <7]
+	config {
+		doctypeSwitch = 1
+	}
+[end]

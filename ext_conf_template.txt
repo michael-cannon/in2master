@@ -1,0 +1,17 @@
+# cat=basic/enable/010; type=boolean; label=Enable Default Page TSConfig
+enableDefaultPageTSconfig = 1
+
+# cat=basic/enable/020; type=boolean; label=Enable Default User TSConfig
+enableDefaultUserTSconfig = 1
+
+# cat=basic/enable/030; type=boolean; label=Enable Minimized RTE
+enableMinimizedRTE = 1
+
+# cat=basic/enable/040; type=boolean; label=Enable Developer Mode
+enableDeveloperMode = 0
+
+# TODO
+# preconfig hosting server settings like composite, png/gif, etc.
+# testing so far demonstrates that it doesn't work
+# cat=basic/enable/; type=boolean; label=Enable Sample Server Specific Config
+enableServerSample = 0

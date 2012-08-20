@@ -1,0 +1,38 @@
+# <INCLUDE_TYPOSCRIPT: source="FILE:EXT:css_styled_content/static/constants.txt">
+
+config {
+	content {
+		# cat=search/enable/0100; type=boolean; label= Enable TYPO3Search Wrapper on non-main content
+		typo3search = 0
+
+	}
+}
+
+content {
+	# cat=content/cHeader/h0; type=options[1,2,3,4,5,6]; label=Default Header type
+	defaultHeaderType = 2
+
+	# cat=content/cHeader/h1; type=options[1,2,3,4,5,6]; label=Default 1st Header Type
+	defaultHeaderTypePrimary = 1
+	
+	# cat=content/cHeader/h2; type=options[1,2,3,4,5,6]; label=Default Sidebar Header Type
+	defaultHeaderTypeSidebar = 5
+	
+	# cat=content/cHeader/h3; type=options[1,2,3,4,5,6]; label=Default 1st Sidebar Header Type
+	defaultHeaderTypeSidebarPrimary = 4
+	
+	# cat=content/cHeader/h5; type=boolean; label=Disable Header Type Swapping
+	disableHeaderTypeSwapping = 0
+
+}
+
+styles {
+	content {
+		# cat=content/cImage/b1; type=int+; label= Sidebar Max Image Width
+		sidebar.imgtext.maxW = 200
+
+		# cat=content/cImage/b2; type=int+; label= Sidebar Max Image Width (Text)
+		sidebar.imgtext.maxWInText = 200
+
+	}
+}

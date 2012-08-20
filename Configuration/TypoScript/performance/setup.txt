@@ -1,0 +1,17 @@
+config {
+	cache_period = {$config.cache_period}
+	compressCss = {$config.compressCss}
+	compressJs = {$config.compressJs}
+	concatenateCss = {$config.concatenateCss}
+	concatenateJs = {$config.concatenateJs}
+	concatenateJsAndCss = {$config.concatenateJsAndCss}
+	disablePrefixComment = {$config.disablePrefixComment}
+	inlineStyle2TempFile = {$config.inlineStyle2TempFile}
+	minifyJS = {$config.minifyJS}
+	moveJsFromHeaderToFooter = {$config.moveJsFromHeaderToFooter}
+	no_cache = {$config.no_cache}
+	removeDefaultCss = {$config.removeDefaultCss}
+	removeDefaultJS = {$config.removeDefaultJS}
+}
+
+tx_ncstaticfilecache.disableCache = {$config.tx_ncstaticfilecache.disableCache}

@@ -1,0 +1,103 @@
+page = PAGE
+page {
+	bodyTag >
+	bodyTagCObject = TEXT
+	bodyTagCObject.dataWrap = <body id="pid-{field:uid}" class="lang-{TSFE:sys_language_uid}"> 
+
+	10 = TEXT
+	10.value = <h1>Please login to backend to access this site</h1>
+}
+
+[globalVar = TSFE : beUserLogin > 0] || [IP = {$config.devIp}]
+page {
+	typeNum = 0
+	shortcutIcon = {$config.template.imgPath}/favicon.ico
+
+	headerData {
+	}
+
+	meta {
+		# needed for responsive design so that mobile devices respect media queries
+		viewport = initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width
+	}
+
+	includeCSS {
+		# the main css
+		main = {$config.template.cssPath}/{$config.css.main}
+
+ 		# print css with options listing
+ 		print = {$config.template.cssPath}/{$config.css.print}
+ 		print {
+ 			# wraps the complete tag, useful for conditional comments
+ 			# allWrap = <!--[if lte IE 7]>|<![endif]-->
+ 
+ 			# media target for CSS
+ 			media = print
+ 
+ 			# optional title of included CSS
+ 			title = in2client Print CSS
+ 
+ 			# If config.minifyCSS is enabled, this disables the compression of this file
+ 			excludeFromConcatenation = 0
+ 
+ 			# If config.concatenateCss is enabled, this prevents the file from being concatenated
+ 			disableCompression = 0
+ 		}
+ 
+ 		# wipeout print option if no CSS for it
+ 		# print >
+
+		extension  = {$config.template.cssPath}/{$config.css.extension}
+	}
+
+	includeJSlibs {
+	}
+
+	includeJS {
+	}
+
+	10 >
+	10 = FLUIDTEMPLATE
+	10 {
+		file = {$config.template.templatesPath}/{$config.template.file}
+		layoutRootPath = {$config.template.layoutsPath}
+		partialRootPath = {$config.template.partialsPath}
+
+		variables {
+		}
+	}
+
+	includeJSFooterlibs {
+		# includes the jquery lib directly from Google
+		jquery = http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
+		jquery {
+			# If set, there is no file existence check. Useful for inclusion of ex ternal files
+			external = 1
+
+			# If set, this file will be added on top of all other files.
+			forceOnTop = 1
+
+			# If config.minifyJS is enabled, this disables the compressi on of this file
+			disableCompression = 1
+
+			# If config.concatenateJs is enabled, this prevents the file from being concatenated
+			excludeFromConcatenation = 1
+		}
+
+		# includes the jquery UI lib directly from Google
+		jqueryUi = http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js
+		jqueryUi {
+			external = 1
+		}
+	}
+
+	includeJSFooter {
+		# the html5 js-lib for older IEs
+		html5shim = http://html5shim.googlecode.com/svn/trunk/html5.js
+		html5shim {
+			external = 1
+ 			allWrap = <!-- HTML5 shim, for IE6-8 support of HTML5 elements --><!--[if lt IE 9]>|<![endif]-->
+		}
+	}
+}
+[end]

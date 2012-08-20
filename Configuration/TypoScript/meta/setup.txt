@@ -1,0 +1,7 @@
+page {
+	meta {
+		DESCRIPTION.field = abstract
+		AUTHOR.field = author
+		KEYWORDS.field = keywords
+	}
+}

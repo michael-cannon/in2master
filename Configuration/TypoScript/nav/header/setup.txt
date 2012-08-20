@@ -1,0 +1,21 @@
+# This menu is slightly more complicated than the others because we copy our default menu again, but then we'll start overriding some settings from the default menu.
+lib.nav.header < lib.nav.default
+lib.nav.header {
+	1 {
+		NO {
+		}
+		
+		# First clear the ATagParams setting of the ACT state because we are working with a copy of the object 'menu'
+		# After that we add our modified configuration for menu.secondlevel
+		ACT {
+		}
+
+		CUR {
+		}
+
+	}
+	
+	# Copy the configuration of the first level of this menu to level 2 and 3
+	2 < .1
+	3 < .1
+}

@@ -1,0 +1,36 @@
+# These are the default TS-constants for in2master (page)
+config {
+	css {
+		# cat=design/file/0020; type=string; label= Main CSS File
+		main = style.css
+
+		# cat=design/file/0022; type=string; label= Print CSS File
+		print = print.css
+
+		# cat=design/file/0024; type=string; label= Extension CSS File
+		extension = extension.css
+	}
+
+	template {
+		# cat=design/file/0030; type=string; label= Templates Path
+		templatesPath = EXT:in2master/Resources/Private/Templates
+
+		# cat=design/file/0035; type=string; label= Main HTML Template File
+		file = in2master_main.html
+
+		# cat=design/file/0040; type=string; label= Layouts Path
+		layoutsPath = EXT:in2master/Resources/Private/Layouts
+
+		# cat=design/file/0050; type=string; label= Partials Path
+		partialsPath = EXT:in2master/Resources/Private/Partials
+
+		# cat=design/file/0060; type=string; label= Public CSS File Path
+		cssPath = EXT:in2master/Resources/Public/css
+
+		# cat=design/file/0070; type=string; label= Public Image File Path
+		imgPath = EXT:in2master/Resources/Public/img
+
+		# cat=design/file/0080; type=string; label= Public JavaScript File Path
+		jsPath = EXT:in2master/Resources/Public/js
+	}
+}

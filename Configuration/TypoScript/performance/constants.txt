@@ -1,0 +1,47 @@
+# These are the default TS-constants for in2master (performance)
+config {
+	# cat=performance/enable; type=boolean; label=Disable Extension BEGIN/END in HTML
+	disablePrefixComment = 1
+
+    # cat=performance/enable; type=boolean; label=No Cache
+    no_cache = 0
+
+	# cat=performance/; type=int; label=Default Cache Period: Given in seconds (3600 per hour)
+	cache_period = 43200
+
+	# cat=performance/enable; type=boolean; label=Compress CSS: CSS files will be minified and compressed
+	compressCss = 1
+
+	# cat=performance/enable; type=boolean; label=Minify CSS: CSS files will be minified and compressed. For TYPO3 4.5+
+	minifyCSS = 1
+
+	# cat=performance/enable; type=boolean; label=Merge CSS: Merges Stylesheet files referenced in the Frontend together
+	concatenateCss = 1
+
+	# cat=performance/enable; type=boolean; label=Merge CSS & JS: Merges Stylesheet and JavaScript files referenced in the Frontend together. For TYPO3 4.5+
+	concatenateJsAndCss = 1
+
+	# cat=performance/enable; type=boolean; label=Remove Default CSS: Default CSS in the header will be removed.
+	removeDefaultCss = 1
+
+	# cat=performance/enable; type=boolean; label=Compress JavaScript: JavaScript files will be minified and compressed
+	compressJs = 1
+
+	# cat=performance/enable; type=boolean; label=Minify JS: JS files will be minified and compressed. For TYPO3 4.5+
+	minifyJS = 1
+
+	# cat=performance/enable; type=boolean; label=Merge JavaScript: Merges Stylesheet files referenced in the Frontend together
+	concatenateJs = 1
+
+	# cat=performance/; type=options[external,1,0]; label=Remove Default JS: Default JavaScript in the header will be removed.
+	removeDefaultJS = 1
+
+	# cat=performance/enable; type=boolean; label=Link to TYPO3 CSS:If set, the inline styles TYPO3 controls in the core are written to a file.
+	inlineStyle2TempFile = 1
+
+	# cat=performance/enable; type=boolean; label=Move JavaScript to Footer
+	moveJsFromHeaderToFooter = 1
+
+	# cat=performance/enable; type=boolean; label=Disable Static Cache
+	tx_ncstaticfilecache.disableCache = 0
+}

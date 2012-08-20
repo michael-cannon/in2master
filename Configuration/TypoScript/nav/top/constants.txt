@@ -1,0 +1,6 @@
+nav {
+	top {
+		# cat=navigation; type=string; label= Top-menu pages: Comma separated list of page id's to be included in top-right menu.
+		pages =
+	}
+}

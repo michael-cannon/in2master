@@ -1,0 +1,16 @@
+config {
+	# cat=design/typo/0100; type=string; label= Logo File: Path to the logo File
+	logo.file = EXT:in2master/Resources/Public/img/in2code_logo.png
+
+	# cat=design/typo/0110; type=string; label= Logo Link: Link Target for the Logo
+	logo.link = www.in2code.de
+
+	# cat=design/typo/0120; type=string; label= Logo Title: Title Attribute for the Logo
+	logo.title = in2code.de - Wir leben TYPO3
+
+	# cat=design/typo/0130; type=string; label= Logo Alt: Alt Attribute for the Logo
+	logo.alt = in2code logo
+
+	# cat=design/typo/0140; type=string; label= Logo Width Maximum
+	logo.width = 140m
+}

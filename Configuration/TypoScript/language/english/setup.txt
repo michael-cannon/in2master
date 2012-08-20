@@ -1,0 +1,17 @@
+# English default
+config {
+	sys_language_uid = 0
+	htmlTag_langKey = en-EN
+	language = en
+	locale_all = en
+}
+   
+# German
+[globalVar = GP:L=1]
+	config {
+		sys_language_uid = 1
+		htmlTag_langKey = de-DE
+		language = de
+		locale_all = de_DE@euro
+	}
+[end]

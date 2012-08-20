@@ -1,0 +1,6 @@
+nav {
+	footer {
+		# cat=navigation; type=string; label= Footer-menu pages: Comma separated list of page id's to be included in footer menu.
+		pages =
+	}
+}
