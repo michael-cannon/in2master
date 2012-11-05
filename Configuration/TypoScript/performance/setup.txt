@@ -12,6 +12,9 @@ config {
 	no_cache = {$config.no_cache}
 	removeDefaultCss = {$config.removeDefaultCss}
 	removeDefaultJS = {$config.removeDefaultJS}
+	stat = {$config.stat}
+	stat_apache = {$config.stat_apache}
+	stat_mysql = {$config.stat_mysql}
 }
 
 tx_ncstaticfilecache.disableCache = {$config.tx_ncstaticfilecache.disableCache}
