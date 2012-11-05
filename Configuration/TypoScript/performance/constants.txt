@@ -45,13 +45,13 @@ config {
 	# cat=performance/enable; type=boolean; label=Disable Static Cache
 	tx_ncstaticfilecache.disableCache = 0
 
-	# cat=performance/enable; type=boolean; label=Disable stat logging
+	# cat=performance/enable; type=boolean; label=Enable Statistics Logging
 	stat = 0
 
-	# cat=performance/enable; type=boolean; label=Disable Apache stat logging
+	# cat=performance/enable; type=boolean; label=Enable Apache Statistics Logging
 	stat_apache = 0
 
-	# cat=performance/enable; type=boolean; label=Disable MySQL stat logging
+	# cat=performance/enable; type=boolean; label=Enable MySQL Statistics Logging
 	stat_mysql = 0
 
 }
